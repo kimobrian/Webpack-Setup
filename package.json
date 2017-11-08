@@ -1,0 +1,17 @@
+{
+  "name": "Webpack-Setup",
+  "version": "1.0.0",
+  "description": "Ideal webpack setup",
+  "main": "index.js",
+  "repository": "git@github.com:kimobrian/Webpack-Setup.git",
+  "author": "kimobrian <brian.kimokoti@andela.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  }
+}
