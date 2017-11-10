@@ -1,15 +1,34 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 require('dotenv').config()
 
-module.exports = {
+const ENV = process.env.APP_ENV;
+const isTest = ENV === 'test'
+const isProd = ENV === 'prod';
+
+function setDevTool() {
+    if (isTest) {
+      return 'inline-source-map';
+    } else if (isProd) {
+      return 'source-map';
+    } else {
+      return 'eval-source-map';
+    }
+}
+
+const config = {
   entry: __dirname + "/src/app/index.js",
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    pathinfo: true
   },
+  devtool: setDevTool(),
   module: {
       rules: [
           {
@@ -43,10 +62,21 @@ module.exports = {
       new webpack.DefinePlugin({
           API_KEY: JSON.stringify(process.env.API_KEY)
       }),
-      new DashboardPlugin()
+    //   new DashboardPlugin()
   ],
   devServer: {
       contentBase: './src/public',
       port: 7700,
   }
 };
+
+if(isProd) {
+    config.plugins.push(
+        new UglifyJSPlugin(),
+        new CopyWebpackPlugin([{
+          from: __dirname + '/src/public'
+      }])
+    );
+};
+
+module.exports = config;
