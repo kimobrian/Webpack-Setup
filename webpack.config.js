@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const webpack = require('webpack');
 require('dotenv').config()
 
@@ -41,7 +42,8 @@ module.exports = {
       }),
       new webpack.DefinePlugin({
           API_KEY: JSON.stringify(process.env.API_KEY)
-      })
+      }),
+      new DashboardPlugin()
   ],
   devServer: {
       contentBase: './src/public',
