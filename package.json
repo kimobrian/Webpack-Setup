@@ -7,8 +7,7 @@
   "author": "kimobrian <brian.kimokoti@andela.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --inline --progress",
-    "build": "webpack-dev-server --history-api-fallback --inline --progress"
+    "start": "webpack-dashboard -- webpack-dev-server --history-api-fallback --inline --progress"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

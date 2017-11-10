@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -62,7 +62,7 @@ const config = {
       new webpack.DefinePlugin({
           API_KEY: JSON.stringify(process.env.API_KEY)
       }),
-    //   new DashboardPlugin()
+      new DashboardPlugin()
   ],
   devServer: {
       contentBase: './src/public',
